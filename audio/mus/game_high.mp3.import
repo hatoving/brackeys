@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/game_high.mp3-d8447be4aa0fb5316447c3bd61f105f5.mp3str"
+
+[deps]
+
+source_file="res://audio/mus/game_high.mp3"
+dest_files=[ "res://.import/game_high.mp3-d8447be4aa0fb5316447c3bd61f105f5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/nuke.mp3-681402b619400d957be3120b658271e9.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/nuke.mp3"
+dest_files=[ "res://.import/nuke.mp3-681402b619400d957be3120b658271e9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

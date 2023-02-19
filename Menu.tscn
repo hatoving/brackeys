@@ -1,0 +1,199 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://code/FadeOut.gd" type="Script" id=1]
+[ext_resource path="res://sprites/storyModeBG.png" type="Texture" id=2]
+[ext_resource path="res://sprites/dudeMainMenu.png" type="Texture" id=3]
+[ext_resource path="res://code/MainMenuDude.gd" type="Script" id=4]
+[ext_resource path="res://ButtonStyles/StyleboxNormal.tres" type="StyleBox" id=5]
+[ext_resource path="res://ButtonStyles/StyleboxHover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ButtonStyles/StyleboxPressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://Fonts/GenericMobileSystemNuebo.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Fonts/GenericMobileSystemNuevo.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://shaders/shd_vignette.gdshader" type="Shader" id=10]
+[ext_resource path="res://code/QuitButton.gd" type="Script" id=11]
+[ext_resource path="res://code/MenuButtons.gd" type="Script" id=12]
+[ext_resource path="res://code/ScreenShakeToggle.gd" type="Script" id=13]
+[ext_resource path="res://code/ChangeWindowSize.gd" type="Script" id=14]
+[ext_resource path="res://code/SettingsBack.gd" type="Script" id=15]
+[ext_resource path="res://code/WindowChangeLabel.gd" type="Script" id=16]
+[ext_resource path="res://sprites/logo.png" type="Texture" id=17]
+[ext_resource path="res://sprites/brackeys.png" type="Texture" id=18]
+
+[sub_resource type="Environment" id=4]
+glow_enabled = true
+glow_intensity = 2.48
+glow_strength = 0.91
+glow_bloom = 0.03
+glow_blend_mode = 0
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=3]
+render_priority = 100
+shader = ExtResource( 10 )
+shader_param/vignette_intensity = 0.414
+shader_param/vignette_opacity = 0.49
+shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
+
+[node name="Menu" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+
+[node name="BG" type="ColorRect" parent="."]
+margin_right = 745.0
+margin_bottom = 488.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ModeBG" type="Sprite" parent="."]
+position = Vector2( 238, 233 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Dude" type="Sprite" parent="."]
+position = Vector2( 220, 290 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+randomShakeStr = 0.5
+
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( 222, 182 )
+texture = ExtResource( 17 )
+script = ExtResource( 4 )
+randomShakeStr = 2.0
+
+[node name="Buttons" type="Node2D" parent="."]
+script = ExtResource( 12 )
+settingsMenu = NodePath("../Settings")
+mainMenu = NodePath(".")
+
+[node name="Play" type="Button" parent="Buttons"]
+margin_left = 447.0
+margin_top = 138.0
+margin_right = 648.0
+margin_bottom = 207.0
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "START GAME"
+
+[node name="Settings" type="Button" parent="Buttons"]
+margin_left = 467.0
+margin_top = 223.0
+margin_right = 628.0
+margin_bottom = 284.0
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "SETTINGS"
+
+[node name="Quit" type="Button" parent="Buttons"]
+margin_left = 515.0
+margin_top = 331.0
+margin_right = 580.0
+margin_bottom = 366.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "QUIT"
+script = ExtResource( 11 )
+
+[node name="Settings" type="Node2D" parent="."]
+visible = false
+
+[node name="Back" type="Button" parent="Settings"]
+margin_left = 515.0
+margin_top = 331.0
+margin_right = 580.0
+margin_bottom = 366.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "BACK"
+script = ExtResource( 15 )
+settingsMenu = NodePath("..")
+mainMenu = NodePath("../../Buttons")
+
+[node name="ScreenShake" type="CheckBox" parent="Settings"]
+margin_left = 496.0
+margin_top = 142.0
+margin_right = 609.0
+margin_bottom = 175.0
+custom_fonts/font = SubResource( 5 )
+pressed = true
+text = "Screen Shake"
+script = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Settings"]
+margin_left = 491.0
+margin_top = 174.0
+margin_right = 611.0
+margin_bottom = 212.0
+custom_fonts/font = ExtResource( 8 )
+text = "Window Size (x1)"
+align = 1
+valign = 1
+script = ExtResource( 16 )
+
+[node name="Change" type="Button" parent="Settings/Label"]
+margin_left = 12.0
+margin_top = 36.0
+margin_right = 107.0
+margin_bottom = 71.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "Change"
+script = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color( 0.411765, 0.411765, 0.411765, 1 )
+margin_left = 151.0
+margin_top = 9.0
+margin_right = 729.0
+margin_bottom = 101.0
+custom_fonts/font = ExtResource( 8 )
+text = "v1.0
+made for the             Game Jam 2023.1
+by hatoving
+
+music by Dominique J. Williams"
+align = 2
+
+[node name="Brackeys" type="Sprite" parent="Label"]
+position = Vector2( 452, 28 )
+texture = ExtResource( 18 )
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource( 3 )
+margin_right = 737.0
+margin_bottom = 481.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="Fade" type="ColorRect" parent="."]
+margin_right = 745.0
+margin_bottom = 488.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="Buttons/Play" to="Buttons" method="_on_Play_pressed"]
+[connection signal="pressed" from="Buttons/Settings" to="Buttons" method="_on_Settings_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="Buttons" method="_on_Quit_pressed"]
+[connection signal="pressed" from="Settings/Back" to="Settings/Back" method="_on_Back_pressed"]
+[connection signal="pressed" from="Settings/Label/Change" to="Settings/Label/Change" method="_on_Change_pressed"]

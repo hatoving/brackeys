@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://code/CannonBall.gd" type="Script" id=1]
+[ext_resource path="res://sprites/cannonBall.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 4.5, 4 )
+
+[node name="Ball" type="Node2D"]
+position = Vector2( 56, 248 )
+script = ExtResource( 1 )
+damage = 390.0
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Hurtbox"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+physics_interpolation_mode = 2
+shape = SubResource( 9 )
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
